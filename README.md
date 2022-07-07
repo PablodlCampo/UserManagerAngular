@@ -1,4 +1,4 @@
-El proceso de desarrollo esta explicado en ProcesoDesarrollo.doc que todavia esta pendiente de revisión.
+El proceso de desarrollo esta explicado en ProcesoDesarrollo.docx que todavia esta pendiente de revisión.
 
 
 # UserManagement
