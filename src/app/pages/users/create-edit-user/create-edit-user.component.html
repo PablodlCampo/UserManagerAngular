@@ -1,18 +1,33 @@
 <div class="container">
-  <form [formGroup]="form" class="form item" (ngSubmit)="onSubmit()" >
+  <form [formGroup]="form" class="form item" (ngSubmit)="onSubmit()">
 
-    <mat-form-field class="form__field">
+    <mat-form-field class="form__field" *ngIf="this.isEdit">
       <label for="id">ID:</label>
-      <input type="text" class="form-control" matInput formControlName="id">
+      <input type="text" class="form-control" matInput  formControlName="id">
     </mat-form-field>
 
     <mat-form-field class="form__field">
       <label for="email">Email:</label>
-      <input type="text" class="form-control" matInput formControlName="email">
+      <input type="email" class="form-control" required matInput formControlName="email">
+
+      <mat-error *ngIf="form.controls['email'].invalid" class="alert">
+        Por favor inserte un email valido.
+      </mat-error>
     </mat-form-field>
+
+    <mat-form-field class="form__field" *ngIf="!this.isEdit">
+      <label for="password">Password:</label>
+      <input autocomplete="new-password" type="password" class="form-control" matInput formControlName="password">
+
+      <mat-error *ngIf="form.controls['password'].invalid" class="alert">
+        Por favor introduzca una contraseña.
+      </mat-error>
+    </mat-form-field>
+
     <div >
       <button  class="form_button"
               mat-raised-button color="primary"
+              [disabled]="form.invalid"
               type="submit">
         Save
       </button>

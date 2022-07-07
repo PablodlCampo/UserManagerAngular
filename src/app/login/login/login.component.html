@@ -6,9 +6,12 @@
         <input matInput placeholder="Email" name="username" formControlName="username" required>
       </mat-form-field>
       <mat-form-field>
-        <input matInput type="password" placeholder="Password" name="password"  formControlName="password" required>
+        <input matInput type="password" placeholder="Password" name="password" formControlName="password" required>
       </mat-form-field>
       <button mat-raised-button color="primary">Login</button>
+      <mat-card-content class="recover-password">
+        <a mat-flat-button href="/users" target="_blank">Recuperar contraseña</a>
+      </mat-card-content>
     </form>
   </mat-card-content>
 </mat-card>

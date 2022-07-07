@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { Buffer } from 'buffer';
 import { LoginResponse } from "./login.interface";
 import { tap } from 'rxjs/operators';
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class LoginService {
 
   private headers!: HttpHeaders;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   login(user: string, password: string): Observable<LoginResponse> {
     let base64Data: string = Buffer.from(user + ":" + password).toString('base64');
@@ -23,11 +24,16 @@ export class LoginService {
 
     return this.httpClient.get<LoginResponse>(this.loginUrl, { headers: this.headers })
       .pipe(
-        tap((response: LoginResponse) => localStorage.setItem('token', response.data.jwt)))
+        tap((response: LoginResponse) =>{
+            localStorage.setItem('token', response.data.jwt),
+            localStorage.setItem('user', user)
+        } ))
   }
 
   logout() {
     localStorage.setItem('token', "");
+    localStorage.setItem('user', "");
+    this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {

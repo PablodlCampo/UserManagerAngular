@@ -8,15 +8,16 @@ import { LoginService } from 'src/app/login/login/login.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  user !: string | null;
 
-  constructor(private loginSevice: LoginService, private router: Router) { }
+  constructor(private loginSevice: LoginService) { }
 
   checkIsLogged() {
+    this.user = localStorage.getItem('user') ?? null;
     return this.loginSevice.isLoggedIn();
   }
 
   logOut() {
     this.loginSevice.logout();
-    this.router.navigate(['/login']);
   }
 }
